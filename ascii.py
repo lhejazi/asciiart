@@ -1,5 +1,12 @@
+# Ascii Image Converter - Create any image to ascii art
+#
+# Created by Leila Hejazi
+# December 2015
+
 from PIL import Image
 from math import ceil
+
+import argparse
 
 # resize new image to fit
 def size_image(image, new_width=500):
@@ -15,11 +22,8 @@ def shade_to_ascii(chars):
         d[x] = chars[x/char_buckets]
     return d
 
-#chars = ['#','@','%','0','M','8','B','&','$','o','r','=','*','+','x','|',':','\"',',','.']
-#chars = list("#@$MNHAERSCTI!mhaescntri*+|:,.")
-chars1 = list("#MNHAERSCTI!lbhmaeosucntri*+:\',.")
-
-asciis = shade_to_ascii(chars1)
+chars = ['#','@','%','0','M','8','B','&','$','o','r','=','*','+','x','|',':','\"',',','.']
+asciis = shade_to_ascii(chars)
 
 # Assign chars
 def pixels_to_ascii(image_data, width):
@@ -38,18 +42,33 @@ def write_to_file(new_image, filename):
 
 if __name__ == '__main__':
     # To generate ascii art from a photo, run the following:
-    # $ python ascii.py <input-image> [output-filename] [width]
+    # $ python ascii.py image [output-filename] [width]
+    #
+    #   ARGUMENTS:
+    #       image(required):            the image file you use to make ascii art
+    #
+    #       output-filename(optional):  the filename you'll give your new ascii art. By
+    #                                   default 'out.txt' is used
+    #
+    #       width(optional):            an adjusted width (in characters) of your image. The height will be adjusted
+    #                                   to specified width using the aspect ratio. Original image
+    #                                   height is used by default
 
-    import sys
-    
-    filename = sys.argv[1]
-    outfile = sys.argv[2] if len(sys.argv) > 2 else 'out.txt'
+    parser = argparse.ArgumentParser(description='Ascii Art Creator')
+    parser.add_argument('image')
+    parser.add_argument('-o --out', dest="outfile", help='output filename', default='out.txt')
+    parser.add_argument('-w --width',
+        dest="width", type=int, help='width (in characters) of new ascii image')
+    args = parser.parse_args()
+
+    filename = args.image
+    outfile = args.outfile
 
     # Convert to grayscale
     image = Image.open(filename).convert('L')
 
     # resize if necessary
-    new_width = int(sys.argv[3]) if len(sys.argv) > 3 else image.size[0]
+    new_width = args.width if args.width else image.size[0]
     i = size_image(image, new_width)
     width, height = i.size
 
@@ -63,6 +82,4 @@ if __name__ == '__main__':
     write_to_file(new_image, outfile)
 
     print "Ascii photo successfully printed to", outfile
-
-
 

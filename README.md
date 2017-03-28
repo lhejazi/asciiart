@@ -11,6 +11,7 @@ $ python ascii.py image
 ```
 
 You can adjust the scale of the image using the optional -w param
+This controls the width (in characters)
 
 ```
 $ python ascii.py image -w width
@@ -19,7 +20,7 @@ $ python ascii.py image -w width
 You can specify the output file of your new ascii art using th optional -o param
 
 ```
-$ python ascii.py image -o outfile
+$ python ascii.py image -o outfile.txt
 ```
 
 ### Prerequisites
@@ -39,7 +40,7 @@ You will soon see your art turned into ascii!
 
 ## Authors
 
-* **Leila Hejazi** 
+**Me! Leila Hejazi** 
 
 Enjoy!
 
