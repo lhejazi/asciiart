@@ -40,7 +40,7 @@ You will soon see your art turned into ascii!
 
 ## Authors
 
-**Me! Leila Hejazi** 
+**Me! Miss Hejazi** 
 
 Enjoy!
 

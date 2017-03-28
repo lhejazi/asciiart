@@ -1,6 +1,6 @@
 # Ascii Image Converter - Create any image to ascii art
 #
-# Created by Leila Hejazi
+# Created by Miss Hejazi
 # December 2015
 
 from PIL import Image
